@@ -1,0 +1,11 @@
+// A* (Considerando tráfico y heurística geográfica)
+MATCH (source:Ubicacion {id: 'ALM_01'}), (target:Ubicacion {id: 'ENT_01'})
+CALL gds.shortestPath.astar.stream('logisticsGraph', {
+    sourceNode: source,
+    targetNode: target,
+    latitudeProperty: 'lat',
+    longitudeProperty: 'lon',
+    relationshipWeightProperty: 'tiempo_estimado'
+})
+YIELD totalCost, nodeIds
+RETURN "Ruta A*" AS Algoritmo, totalCost AS Tiempo_Total, [nodeId IN nodeIds | gds.util.asNode(nodeId).id] AS Ruta;
