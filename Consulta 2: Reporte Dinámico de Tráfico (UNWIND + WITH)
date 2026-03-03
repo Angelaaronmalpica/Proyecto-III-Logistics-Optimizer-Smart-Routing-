@@ -1,0 +1,6 @@
+WITH ['ALM_01', 'INT_01', 'ENT_02'] AS lista_nodos
+UNWIND lista_nodos AS id_nodo
+MATCH (n:Ubicacion {id: id_nodo})-[r:CONECTA_A]->()
+WITH n, r.estado_trafico AS trafico
+RETURN n.id AS Ubicacion, avg(trafico) AS Trafico_Promedio_Salida
+ORDER BY Trafico_Promedio_Salida DESC;
