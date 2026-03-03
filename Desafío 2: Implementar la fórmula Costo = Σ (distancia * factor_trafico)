@@ -1,0 +1,6 @@
+// Desafío 2: Implementar la fórmula Costo = Σ (distancia * factor_trafico)
+MATCH p = (a:Almacen {id: 'ALM_01'})-[:CONECTA_A*..5]->(e:PuntoEntrega {id: 'ENT_01'})
+UNWIND relationships(p) AS rel
+WITH p, sum(rel.distancia * rel.estado_trafico) AS costo_logistico
+RETURN [n IN nodes(p) | n.id] AS Ruta, costo_logistico
+ORDER BY costo_logistico ASC LIMIT 1;
