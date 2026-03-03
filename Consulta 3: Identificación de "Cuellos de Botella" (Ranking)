@@ -1,0 +1,5 @@
+MATCH (i:Interseccion)-[r:CONECTA_A]-()
+WITH i, count(r) AS conexiones
+WHERE conexiones > 2
+RETURN i.id AS Nodo_Critico, i.zona AS Zona, conexiones
+ORDER BY conexiones DESC;
