@@ -1,0 +1,3 @@
+CALL gds.graph.list() 
+YIELD graphName, nodeCount, relationshipCount, schema
+RETURN graphName, nodeCount, relationshipCount;
