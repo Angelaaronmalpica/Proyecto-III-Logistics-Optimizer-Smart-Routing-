@@ -1,0 +1,13 @@
+// 4. CREACIÓN DE RELACIONES (CONECTA_A)
+// Optimizadas para evitar "Cartesian Product" mediante el uso de MATCH individuales.
+// Propiedades obligatorias: distancia, tiempo_estimado, estado_trafico [cite: 9]
+
+// Ruta 1: Almacén a Intersección 1
+MATCH (a:Ubicacion {id: 'ALM_01'})
+MATCH (i:Ubicacion {id: 'INT_01'})
+CREATE (a)-[:CONECTA_A {
+    distancia: 5.5, 
+    tiempo_estimado: 12, 
+    estado_trafico: 0.1, 
+    capacidad_max: 20.0
+}]->(i);
