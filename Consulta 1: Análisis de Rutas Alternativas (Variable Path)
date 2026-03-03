@@ -1,0 +1,3 @@
+MATCH path = (a:Almacen {id: 'ALM_01'})-[:CONECTA_A*1..4]-(p:PuntoEntrega)
+RETURN p.cliente AS Cliente, count(path) AS Rutas_Disponibles, 
+       min(length(path)) AS Saltos_Minimos;
