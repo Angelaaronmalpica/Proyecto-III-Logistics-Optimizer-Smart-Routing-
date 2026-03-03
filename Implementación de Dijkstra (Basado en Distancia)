@@ -1,0 +1,11 @@
+MATCH (source:Ubicacion {id: 'ALM_01'}), (target:Ubicacion {id: 'ENT_01'})
+CALL gds.shortestPath.dijkstra.stream('logisticsGraph', {
+    sourceNode: source,
+    targetNode: target,
+    relationshipWeightProperty: 'distancia'
+})
+YIELD index, sourceNode, targetNode, totalCost, nodeIds, costs, path
+RETURN gds.util.asNode(sourceNode).id AS origen,
+       gds.util.asNode(targetNode).id AS destino,
+       totalCost AS distancia_total,
+       [nodeId IN nodeIds | gds.util.asNode(nodeId).id] AS ruta;
