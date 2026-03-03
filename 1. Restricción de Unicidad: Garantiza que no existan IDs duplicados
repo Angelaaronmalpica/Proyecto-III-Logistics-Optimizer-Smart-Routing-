@@ -1,0 +1,8 @@
+// 1. Restricción de Unicidad: Garantiza que no existan IDs duplicados
+// Esto crea automáticamente un índice interno de alto rendimiento.
+CREATE CONSTRAINT ubc_id_unico IF NOT EXISTS 
+FOR (u:Ubicacion) REQUIRE u.id IS UNIQUE;
+
+// 2. Índice de Búsqueda: Optimiza las consultas que filtran por zona o cliente
+CREATE INDEX idx_zona_interseccion IF NOT EXISTS 
+FOR (i:Interseccion) ON (i.zona);
