@@ -1,0 +1,8 @@
+MATCH (a:Almacen)
+CALL {
+    WITH a
+    MATCH (a)-[:CONECTA_A*..3]->(p:PuntoEntrega)
+    RETURN p.cliente AS Cliente_Prioritario, p.prioridad AS Nivel
+    ORDER BY p.prioridad ASC LIMIT 1
+}
+RETURN a.nombre AS Almacen, Cliente_Prioritario, Nivel;
